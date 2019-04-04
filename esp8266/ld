@@ -1,0 +1,1 @@
+/opt/esp8266-nonos-sdk/ld
