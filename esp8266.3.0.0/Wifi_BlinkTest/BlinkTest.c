@@ -104,11 +104,14 @@ user_init()
   // init gpio subsytem
   gpio_init();
 
-  // configure UART TXD to be GPIO1, set as output
-  PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2); 
-  gpio_output_set(0, 0, (1 << pin), 0);
+  while (wifi_station_get_connect_status() != STATION_GOT_IP)
+  {
+    // configure UART TXD to be GPIO1, set as output
+    PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2); 
+    gpio_output_set(0, 0, (1 << pin), 0);
 
-  // setup timer (500ms, repeating)
-  os_timer_setfn(&some_timer, (os_timer_func_t *)some_timerfunc, NULL);
-  os_timer_arm(&some_timer, 500, 1);
+    // setup timer (500ms, repeating)
+    os_timer_setfn(&some_timer, (os_timer_func_t *)some_timerfunc, NULL);
+    os_timer_arm(&some_timer, 500, 1);
+  }
 }
