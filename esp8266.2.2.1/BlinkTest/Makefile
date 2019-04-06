@@ -31,6 +31,7 @@ details:
 clean:
 	rm -f BlinkTest BlinkTest.o BlinkTest-0x00000.bin BlinkTest-0x10000.bin
 	esptool.py erase_flash
+	$(MAKE) flash-factory
 
 flash-factory:
 	esptool.py write_flash 0xFC000 $(SDK)/bin/esp_init_data_default_v05.bin
