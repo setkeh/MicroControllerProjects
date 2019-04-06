@@ -74,7 +74,7 @@ void ICACHE_FLASH_ATTR user_init()
   gpio_init();
 
   // configure UART TXD to be GPIO1, set as output
-  //PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDI_U,, FUNC_GPIO2); 
+  PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2); 
   gpio_output_set(0, 0, (1 << pin), 0);
 
   // setup timer (500ms, repeating)

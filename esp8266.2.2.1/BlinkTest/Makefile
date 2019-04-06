@@ -11,7 +11,7 @@ all:
 	$(MAKE) flash
 
 BlinkTest-0x00000.bin: BlinkTest
-	esptool.py --chip esp8266 elf2image $^
+	esptool.py elf2image $^
 
 BlinkTest: BlinkTest.o
 
@@ -25,9 +25,12 @@ flash: BlinkTest-0x00000.bin
 	#esptool.py write_flash 0x0 $(SDK)/bin/boot_v1.2.bin 0x10000 BlinkTest-0x00000.bin 0x81000 BlinkTest-0x10000.bin
 
 details: 
-	esptool.py --chip esp8266 image_info BlinkTest-0x00000.bin
-	esptool.py --chip esp8266 image_info BlinkTest-0x10000.bin
+	esptool.py image_info BlinkTest-0x00000.bin
+	esptool.py esp8266 image_info BlinkTest-0x10000.bin
 
 clean:
 	rm -f BlinkTest BlinkTest.o BlinkTest-0x00000.bin BlinkTest-0x10000.bin
 	esptool.py erase_flash
+
+flash-factory:
+	esptool.py write_flash 0xFC000 $(SDK)/bin/esp_init_data_default_v05.bin
