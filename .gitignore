@@ -1,2 +1,6 @@
 .vscode
 user_config.h
+BlinkTest-0x00000.bin
+BlinkTest-0x10000.bin
+BlinkTest.o
+BlinkTest
