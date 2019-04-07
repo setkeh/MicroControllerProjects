@@ -1,4 +1,4 @@
-SDK=/opt/esp8266-nonos-sdk.3.0.0/
+SDK=/opt/esp8266-nonos-sdk.3.0.0
 CC = xtensa-lx106-elf-gcc
 CFLAGS = -I. -I$(SDK)/include -I$(SDK)/include/json -I$(SDK)/driver_lib/include/driver -I$(SDK)/driver_lib/driver -mlongcalls
 LDLIBS = -nostdlib -Wl,--start-group -lc -ldriver -lgcc -lcrypto -lphy -lpp -lnet80211 -llwip -lwpa -lwpa2 -lcrypto -lmain -ljson -lupgrade -lmbedtls -lwps -lsmartconfig -lairkiss -Wl,--end-group -lgcc
@@ -13,9 +13,9 @@ all:
 BlinkTest-0x00000.bin: BlinkTest
 	esptool.py elf2image $^
 
-BlinkTest: BlinkTest.o
+BlinkTest: BlinkTest.o blink.o wifi.o
 
-BlinkTest.o: BlinkTest.c
+BlinkTest.o: blink.c wifi.c BlinkTest.c
 
 flash: BlinkTest-0x00000.bin
 	esptool.py write_flash 0x0 BlinkTest-0x00000.bin 0x10000 BlinkTest-0x10000.bin
