@@ -19,10 +19,6 @@ BlinkTest.o: BlinkTest.c
 
 flash: BlinkTest-0x00000.bin
 	esptool.py write_flash 0x0 BlinkTest-0x00000.bin 0x10000 BlinkTest-0x10000.bin
-	#esptool.py write_flash 0x0 $(SDK)/bin/boot_v1.7.bin 0x10000 BlinkTest-0x00000.bin 0x81000 BlinkTest-0x10000.bin
-	#esptool.py write_flash -fm dio 0x0 $(SDK)/bin/boot_v1.7.bin 0x10000 BlinkTest-0x00000.bin
-	#esptool.py write_flash 0x0 $(SDK)/bin/boot_v1.2.bin 0x10000 BlinkTest-0x00000.bin 0x3e000 BlinkTest-0x10000.bin 0x7e000 $(SDK)/bin/blank.bin
-	#esptool.py write_flash 0x0 $(SDK)/bin/boot_v1.2.bin 0x10000 BlinkTest-0x00000.bin 0x81000 BlinkTest-0x10000.bin
 
 details: 
 	esptool.py image_info BlinkTest-0x00000.bin
@@ -33,5 +29,6 @@ clean:
 	esptool.py erase_flash
 	$(MAKE) flash-factory
 
+# Flash the factory Interupt and control binaries.
 flash-factory:
 	esptool.py write_flash 0xFC000 $(SDK)/bin/esp_init_data_default_v05.bin

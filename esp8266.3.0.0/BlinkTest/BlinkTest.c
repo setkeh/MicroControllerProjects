@@ -58,13 +58,15 @@ void ICACHE_FLASH_ATTR user_pre_init(void) {
    }
 }
 
-// ESP-12 modules have LED on GPIO2. Change to another GPIO
-// for other boards.
+// Define Pin GPIO_2 as the LED test Pin
 static const int pin = 2;
 static volatile os_timer_t some_timer;
+struct ip_info info;
 
 void some_timerfunc(void *arg)
 {
+  wifi_get_ip_info(0, &info);
+
   //Do blinky stuff
   if (GPIO_REG_READ(GPIO_OUT_ADDRESS) & (1 << pin))
   {
@@ -76,21 +78,21 @@ void some_timerfunc(void *arg)
   {
     // set gpio high
     gpio_output_set((1 << pin), 0, 0, 0);
-    os_printf("LED state - %d.\n", "HIGH");
+    os_printf("LED state - %s IP: %s\n", "HIGH", IP2STR(&info.ip.addr));
   }
 }
 
-void ICACHE_FLASH_ATTR user_init()
+void ICACHE_FLASH_ATTR 
+user_init()
 {
-  uart_init(BIT_RATE_115200, BIT_RATE_115200);
+  uart_div_modify(0, UART_CLK_FREQ / 115200);
   system_set_os_print(TRUE);
   
-  os_delay_us(1000);
   // init gpio subsytem
   gpio_init();
 
   // configure UART TXD to be GPIO1, set as output
-  PIN_FUNC_SELECT(PERIPHS_IO_MUX_U0RXD_U, FUNC_GPIO1); 
+  PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2); 
   gpio_output_set(0, 0, (1 << pin), 0);
 
   // setup timer (500ms, repeating)
