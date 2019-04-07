@@ -37,7 +37,6 @@ user_init()
   
   // configure UART TXD to be GPIO1, set as output
   PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2); 
-  gpio_output_set(0, 0, (1 << pin), 0);
 
   // setup timer (500ms, repeating)
   os_timer_setfn(&blink_timer, (os_timer_func_t *)blink_timerfunc, NULL);
