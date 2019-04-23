@@ -5,8 +5,8 @@ LDLIBS = -nostdlib -Wl,--start-group -lc -ldriver -lgcc -lcrypto -lphy -lpp -lne
 LDDIR = ../ld
 LDFLAGS = -T$(LDDIR)/eagle.app.v6.ld -L$(SDK)/lib -L$(SDK)/driver_lib/driver -L$(SDK)/driver_lib/include/driver
 MAIN = main
-SRC = blink.c wifi.c main.c flashmap.c
-OBJ = main.o blink.o wifi.o flashmap.o
+SRC = irc.c blink.c wifi.c main.c flashmap.c
+OBJ = main.o irc.o blink.o wifi.o flashmap.o
 
 all: 
 	$(MAKE) $(MAIN)

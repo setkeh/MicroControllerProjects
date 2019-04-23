@@ -1,0 +1,1 @@
+void ICACHE_FLASH_ATTR tcp_client_connect();
