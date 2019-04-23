@@ -1,6 +1,18 @@
+# Global Ignores
 .vscode
 user_config.h
+
+# Blink Test Ignores
 BlinkTest-0x00000.bin
 BlinkTest-0x10000.bin
 BlinkTest.o
 BlinkTest
+
+# IRC bot Ignores
+main.o
+irc.o
+blink.o
+wifi.o
+flashmap.o
+main-0x00000.bin
+main-0x10000.bin
