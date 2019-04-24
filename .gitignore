@@ -11,6 +11,7 @@ BlinkTest
 # IRC bot Ignores
 main.o
 irc.o
+irc_cb.o
 blink.o
 wifi.o
 flashmap.o

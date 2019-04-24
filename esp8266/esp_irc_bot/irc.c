@@ -7,32 +7,14 @@
 #include "user_config.h"
 #include "espconn.h"
 #include "wifi.h"
-
-void ICACHE_FLASH_ATTR
-tcp_recv_cb(void *arg, char *pusrdata, unsigned short lenght) {
-  os_printf("Data Recived: %s \r\n", pusrdata);
-}
-
-LOCAL void ICACHE_FLASH_ATTR
-tcp_connected_callback(void *arg) {
-  struct espconn *pespconn = arg;
-
-  os_printf("Connect to IRC Successful !! \r\n");
-
-  espconn_regist_recvcb(pespconn, tcp_recv_cb);
-  //espconn_regist_sentcb(pespconn, tcp_sent_cb);
-}
-
-LOCAL void ICACHE_FLASH_ATTR
-tcp_reconnected_callback() {
-  tcp_client_connect();
-}
+#include "irc.h"
+#include "irc_cb.h"
 
 void ICACHE_FLASH_ATTR
 tcp_client_connect() {
   LOCAL struct espconn conn;
   static esp_tcp tcp_s;
-  LOCAL uint8 esp_tcpip_server[4] = {195, 154, 200, 232};
+  LOCAL uint8 esp_tcpip_server[4] = {10, 0, 0, 8}; //{195, 154, 200, 232};  {10, 0, 0, 8};
 
   os_printf("Entered tcpConnect\r\n");
   conn.proto.tcp = &tcp_s;
