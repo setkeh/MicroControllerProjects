@@ -27,6 +27,6 @@ tcp_client_connect() {
   espconn_regist_connectcb(&conn, tcp_connected_callback);
   espconn_regist_reconcb(&conn, tcp_reconnected_callback);
   //espconn_regist_disconcb(&conn, tcp_disconnected_callback);
-
+  
   espconn_connect(&conn);
 }

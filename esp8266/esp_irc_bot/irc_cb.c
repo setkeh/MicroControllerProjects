@@ -76,7 +76,7 @@ tcp_connected_callback(void *arg) {
   espconn_regist_recvcb(pespconn, tcp_recv_cb);
   espconn_regist_sentcb(pespconn, tcp_sent_cb);
 
-  espconn_set_opt(pespconn, 0x04);
+  espconn_set_opt(pespconn, 0x00);
   init_irc_on_connect(pespconn);
 }
 
