@@ -14,7 +14,7 @@ void ICACHE_FLASH_ATTR
 tcp_client_connect() {
   LOCAL struct espconn conn;
   static esp_tcp tcp_s;
-  LOCAL uint8 esp_tcpip_server[4] = {10, 0, 0, 8}; //{195, 154, 200, 232};  {10, 0, 0, 8};
+  LOCAL uint8 esp_tcpip_server[4] = {195, 154, 200, 232}; //{195, 154, 200, 232};  {10, 0, 0, 8};
 
   os_printf("Entered tcpConnect\r\n");
   conn.proto.tcp = &tcp_s;

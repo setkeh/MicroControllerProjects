@@ -12,26 +12,30 @@
 
 LOCAL void ICACHE_FLASH_ATTR
 send_user_timer(void *arg) {
-  struct espconn *pespconn = arg;
-  espconn_sent(pespconn, "USER ESP8266 1 x : ESP8266Bot\r\n", 29);
+  struct espconn *pespconn=(struct espconn *)arg;
+  char *data = "USER ESP8266 1 x : ESP8266Bot";
+  espconn_sent(pespconn, data, strlen(data));
 }
 
 LOCAL void ICACHE_FLASH_ATTR
 send_nick_timer(void *arg) {
-  struct espconn *pespconn = arg;
-  espconn_sent(pespconn, "NICK ESP8266Bot\r\n", 15);
+  struct espconn *pespconn=(struct espconn *)arg;
+  char *data = "NICK ESP8266Bot";
+  espconn_sent(pespconn, data, strlen(data));
 }
 
 LOCAL void ICACHE_FLASH_ATTR
 send_join_timer(void *arg) {
-  struct espconn *pespconn = arg;
-  espconn_sent(pespconn, "JOIN #thesetkehproject\r\n", 22);
+  struct espconn *pespconn=(struct espconn *)arg;
+  char *data = "JOIN #thesetkehproject";
+  espconn_sent(pespconn, data, strlen(data));
 }
 
 LOCAL void ICACHE_FLASH_ATTR
 send_hello_timer(void *arg) {
-  struct espconn *pespconn = arg;
-  espconn_sent(pespconn, "PRIVMSG #thesetkehproject : ESP8266 Hello World\r\n", 48);
+  struct espconn *pespconn=(struct espconn *)arg;
+  char *data = "PRIVMSG #thesetkehproject : ESP8266 Hello World";
+  espconn_sent(pespconn, data, strlen(data));
 }
 
 void ICACHE_FLASH_ATTR
@@ -63,11 +67,6 @@ tcp_recv_cb(void *arg, char *pusrdata, unsigned short lenght) {
   os_printf("%s \r\n", pusrdata);
 }
 
-LOCAL void ICACHE_FLASH_ATTR
-tcp_write_finish() {
-
-}
-
 void ICACHE_FLASH_ATTR
 tcp_connected_callback(void *arg) {
   struct espconn *pespconn = arg;
@@ -78,7 +77,6 @@ tcp_connected_callback(void *arg) {
   espconn_regist_sentcb(pespconn, tcp_sent_cb);
 
   espconn_set_opt(pespconn, 0x04);
-  espconn_regist_write_finish(pespconn, tcp_write_finish);
   init_irc_on_connect(pespconn);
 }
 
